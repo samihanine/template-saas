@@ -1,0 +1,54 @@
+{
+  "hours": "{count, plural, one {hour} other {hours}}",
+  "minutes": "{count, plural, one {minute} other {minutes}}",
+  "auth": {
+    "save": "Save",
+    "signUpTitle": "Create a new account",
+    "signInTitle": "Sign in with your account",
+    "forgotTitle": "Reset your password",
+    "verifyTitle": "Email verification",
+    "verifySuccessTitle": "Email verified!",
+    "setTitle": "Set a new password",
+    "reset": "Reset password",
+    "set": "Save new password",
+    "setSuccess": "Successfully set a new password.",
+    "setError": "Invalid access token or type.",
+    "email": "Email address",
+    "password": "Password",
+    "forgot": "Forgot your password?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "signUpGoogle": "Sign Up with Google",
+    "signInGoogle": "Sign In with Google ",
+    "or": "Or",
+    "loginNow": "Continue to application"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "resources": "Resources",
+    "jobs": "Jobs",
+    "signOut": "Sign Out",
+    "signOutError": "Unable to sign out",
+    "signedInAs": "Signed in as"
+  },
+  "settings": {
+    "save": "Save",
+    "language": "Language",
+    "email": "Email",
+    "account": "Account",
+    "updateSuccess": "Successfully updated settings",
+    "updateFail": "Failed to update settings",
+    "supportProject": "Support this project by",
+    "buyMeACoffee": "buying me a coffee"
+  },
+  "resources": {
+    "news": "News",
+    "document": "Document",
+    "title": "Données sur les ressources"
+  }
+}

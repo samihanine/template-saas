@@ -1,0 +1,93 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum ResourcesType {
+    NEWS
+    DOCUMENT
+}
+
+model Settings {
+    userId    String    @id @unique
+    language  String
+    deletedAt DateTime?
+}
+
+model Profiles {
+    userId      String    @id @unique
+    email       String
+    provider    String?
+    createdAt   DateTime  @default(now())
+    processedAt DateTime?
+    metadata    Json?
+    updatedAt   DateTime  @updatedAt
+    deletedAt   DateTime?
+}
+
+model Resources {
+    id          String        @id @default(uuid())
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+    publishedAt DateTime      @default(now())
+    type        ResourcesType @default(NEWS)
+    imageUrl    String?
+    metadata    Json?
+    deletedAt   DateTime?
+    isVisible   Boolean       @default(true)
+
+    // Relations
+    translations ResourcesTranslations[]
+}
+
+model ResourcesTranslations {
+    id         String @id @default(uuid())
+    language   String
+    title      String
+    content    String
+    keywords   String
+    resourceId String
+
+    // Relations
+    resources Resources @relation(fields: [resourceId], references: [id])
+}
+
+enum JobLocation {
+    REMOTE
+    ON_SITE
+    HYBRID
+}
+
+model Jobs {
+    id          String      @id @default(uuid())
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    deletedAt   DateTime?
+    publishedAt DateTime    @default(now())
+    isVisible   Boolean     @default(true)
+    location    JobLocation
+    place       String
+    link        String?
+    salary      String
+
+    // Relations
+    translations JobsTranslations[]
+}
+
+model JobsTranslations {
+    id       String @id @default(uuid())
+    jobId    String
+    language String
+
+    title    String
+    content  String
+    duration String
+    type     String
+
+    // Relations
+    jobs Jobs @relation(fields: [jobId], references: [id])
+}
