@@ -45,7 +45,6 @@ export const UpdatePassword = () => {
         <Input
           id="newPassword"
           type="password"
-          label="Nouveau mot de passe"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="Nouveau mot de passe"
@@ -53,7 +52,6 @@ export const UpdatePassword = () => {
         <Input
           id="confirmNewPassword"
           type="password"
-          label="Confirmer le nouveau mot de passe"
           value={confirmNewPassword}
           onChange={(e) => setConfirmNewPassword(e.target.value)}
           placeholder="Confirmer le nouveau mot de passe"

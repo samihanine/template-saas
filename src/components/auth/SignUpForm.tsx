@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { GoogleButton } from '@/components/auth/GoogleButton';
 import { LoadingSpinner } from '@/components/icons/LoadingSpinner';
 import { LANG_COOKIE_KEY } from '@/constants';
+import { Input } from '../ui/Input';
+import { Button } from '../ui/Button';
 
 export const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -68,7 +70,7 @@ export const SignUpForm: React.FC = () => {
           {t('email')}
         </label>
         <div className="mt-1">
-          <input
+          <Input
             id="email"
             name="email"
             type="email"
@@ -76,7 +78,6 @@ export const SignUpForm: React.FC = () => {
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>
@@ -86,7 +87,7 @@ export const SignUpForm: React.FC = () => {
           {t('password')}
         </label>
         <div className="mt-1">
-          <input
+          <Input
             id="password"
             name="password"
             type="password"
@@ -94,7 +95,6 @@ export const SignUpForm: React.FC = () => {
             onChange={(event) => setPassword(event.target.value)}
             autoComplete="current-password"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>
@@ -102,13 +102,9 @@ export const SignUpForm: React.FC = () => {
       {errorMessage && <p className="text-sm text-red-600 ">{errorMessage}</p>}
 
       <div className="space-y-4">
-        <button
-          type="submit"
-          disabled={loading}
-          className="flex w-full justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        >
+        <Button type="submit" disabled={loading}>
           {loading ? <LoadingSpinner /> : t('signUp')}
-        </button>
+        </Button>
 
         <GoogleButton type="signup" />
       </div>

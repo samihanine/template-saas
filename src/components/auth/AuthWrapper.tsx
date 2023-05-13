@@ -11,19 +11,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-/*
-const AlternativeLink: React.FC<{ type: AuthType }> = ({ type }) => {
-  const t = useTranslations('auth');
-
-  const signInTitle = t('signInTitle')[0]?.toLowerCase() + t('signInTitle').substring(1);
-  const signUpTitle = t('signUpTitle')[0]?.toLowerCase() + t('signUpTitle').substring(1);
-
-  if (type === 'signup') return <Link href="/signin">{signInTitle}</Link>;
-
-  return <Link href="/signup">{signUpTitle}</Link>;
-};
-*/
-
 const authTypeToText = (type: AuthType): string => {
   if (type === 'signin') return 'SignIn';
   if (type === 'signup') return 'SignUp';

@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const {
   withPlausibleProxy
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require('next-plausible');
 
 module.exports = withPlausibleProxy()({

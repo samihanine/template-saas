@@ -2,11 +2,12 @@ import { useTranslations } from 'next-intl';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useState } from 'react';
 import { LoadingSpinner } from '@/components/icons/LoadingSpinner';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
+import { toast } from 'react-hot-toast';
 
 export const ForgotPasswordForm: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [successMessage, setSuccessMessage] = useState<string>();
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
 
   const { supabaseClient } = useSessionContext();
@@ -14,9 +15,6 @@ export const ForgotPasswordForm: React.FC = () => {
   const t = useTranslations('auth');
 
   const handleForgot = async () => {
-    // clear messages
-    setSuccessMessage(undefined);
-    setErrorMessage(undefined);
     setLoading(true);
 
     const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
@@ -26,11 +24,13 @@ export const ForgotPasswordForm: React.FC = () => {
     setLoading(false);
 
     if (error) {
-      setErrorMessage(error.message);
+      toast.error(error.message);
       return;
     }
 
-    if (data) setSuccessMessage('Password reset email sent');
+    if (data) {
+      toast.success('Check your email for the reset link');
+    }
   };
 
   return (
@@ -47,7 +47,7 @@ export const ForgotPasswordForm: React.FC = () => {
           {t('email')}
         </label>
         <div className="mt-1">
-          <input
+          <Input
             id="email"
             name="email"
             type="email"
@@ -55,22 +55,14 @@ export const ForgotPasswordForm: React.FC = () => {
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>
 
-      {successMessage && <p className="text-sm text-green-600 ">{successMessage}</p>}
-      {errorMessage && <p className="text-sm text-red-600 ">{errorMessage}</p>}
-
       <div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="flex w-full justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        >
+        <Button type="submit" disabled={loading}>
           {loading ? <LoadingSpinner /> : t('reset')}
-        </button>
+        </Button>
       </div>
     </form>
   );

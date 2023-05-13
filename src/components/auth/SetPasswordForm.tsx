@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { LoadingSpinner } from '@/components/icons/LoadingSpinner';
+import { Label } from '../ui/Label';
+import { Input } from '../ui/Input';
 
 export const SetPasswordForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [hash, setHash] = useState('');
-  const [successMessage, setSuccessMessage] = useState<string>();
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
 
   const { supabaseClient } = useSessionContext();
@@ -23,9 +23,6 @@ export const SetPasswordForm: React.FC = () => {
   }, []);
 
   const handleSubmit = async () => {
-    // clear messages
-    setSuccessMessage(undefined);
-    setErrorMessage(undefined);
     setLoading(true);
 
     const hashArr = hash
@@ -55,7 +52,7 @@ export const SetPasswordForm: React.FC = () => {
     setLoading(false);
 
     if (error) {
-      setErrorMessage(error.message);
+      toast.error(error.message);
       return;
     }
 
@@ -73,11 +70,9 @@ export const SetPasswordForm: React.FC = () => {
       className="space-y-6"
     >
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          {t('password')}
-        </label>
+        <Label htmlFor="email">{t('password')}</Label>
         <div className="mt-1">
-          <input
+          <Input
             id="password"
             name="password"
             type="password"
@@ -85,7 +80,6 @@ export const SetPasswordForm: React.FC = () => {
             onChange={(event) => setPassword(event.target.value)}
             autoComplete="email"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>

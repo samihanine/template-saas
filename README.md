@@ -41,7 +41,3 @@ Run tests locally. For this you need to have a local instance of the app running
 ```bash
 pnpm run test
 ```
-
-## License
-
-`railtrack` is available under the AGPL-3.0 license. See the [LICENSE](LICENSE.md) file for more info.

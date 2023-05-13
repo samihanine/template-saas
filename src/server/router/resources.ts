@@ -4,18 +4,8 @@ import { protectedProcedure, router } from '@/server/trpc';
 
 const resourceSchema = z.object({
   id: z.string().optional(),
-  type: z.enum(['NEWS', 'DOCUMENT']),
-  imageUrl: z.string().optional(),
-  isVisible: z.boolean().optional(),
-  publishedAt: z.date().optional(),
-  translations: z.array(
-    z.object({
-      language: z.string(),
-      title: z.string(),
-      content: z.string(),
-      keywords: z.string(),
-    })
-  ),
+  title: z.string(),
+  description: z.string(),
 });
 
 export const resourcesRouter = router({
@@ -31,7 +21,7 @@ export const resourcesRouter = router({
     });
 
     if (!item) {
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'lead not found' });
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'resource not found' });
     }
 
     return item;
@@ -51,21 +41,9 @@ export const resourcesRouter = router({
   create: protectedProcedure.input(resourceSchema).mutation(async ({ ctx, input }) => {
     const item = await ctx.prisma.resources.create({
       data: {
-        type: input.type,
-        imageUrl: input.imageUrl,
-        isVisible: input.isVisible,
-        publishedAt: input.publishedAt,
+        ...input,
       },
     });
-
-    for (const translation of input.translations) {
-      await ctx.prisma.resourcesTranslations.create({
-        data: {
-          ...translation,
-          resourceId: item.id,
-        },
-      });
-    }
 
     return item;
   }),
@@ -75,24 +53,9 @@ export const resourcesRouter = router({
         id: input.id,
       },
       data: {
-        type: input.type,
-        imageUrl: input.imageUrl,
-        isVisible: input.isVisible,
-        publishedAt: input.publishedAt,
+        ...input,
       },
     });
-
-    for (const translation of input.translations) {
-      await ctx.prisma.resourcesTranslations.updateMany({
-        where: {
-          resourceId: item.id,
-          language: translation.language,
-        },
-        data: {
-          ...translation,
-        },
-      });
-    }
 
     return item;
   }),
