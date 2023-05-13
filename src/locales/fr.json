@@ -45,10 +45,5 @@
     "updateFail": "Échec de la mise à jour des paramètres",
     "supportProject": "Soutenez ce projet en",
     "buyMeACoffee": "m'acheter un café"
-  },
-  "resources": {
-    "news": "Nouvelle",
-    "document": "Document",
-    "title": "Resources data"
   }
 }

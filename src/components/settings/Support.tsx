@@ -14,7 +14,7 @@ export const Support: React.FC = () => (
         <p>
           Email contact:{' '}
           <Link className="font-bold text-primary" href="mailto:sami.hanine22@gmail.com">
-            sami.hanine22@gmail.com
+            contact@example.com
           </Link>
         </p>
       </div>

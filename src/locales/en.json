@@ -45,10 +45,5 @@
     "updateFail": "Failed to update settings",
     "supportProject": "Support this project by",
     "buyMeACoffee": "buying me a coffee"
-  },
-  "resources": {
-    "news": "News",
-    "document": "Document",
-    "title": "Données sur les ressources"
   }
 }

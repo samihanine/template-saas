@@ -2,15 +2,15 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { protectedProcedure, router } from '@/server/trpc';
 
-const resourceSchema = z.object({
+const articleSchema = z.object({
   id: z.string().optional(),
   title: z.string(),
   description: z.string(),
 });
 
-export const resourcesRouter = router({
+export const articlesRouter = router({
   getOne: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    const item = await ctx.prisma.resources.findFirst({
+    const item = await ctx.prisma.articles.findFirst({
       where: {
         id: input,
         deletedAt: null,
@@ -27,7 +27,7 @@ export const resourcesRouter = router({
     return item;
   }),
   getAll: protectedProcedure.query(async ({ ctx }) => {
-    const items = await ctx.prisma.resources.findMany({
+    const items = await ctx.prisma.articles.findMany({
       where: {
         deletedAt: null,
       },
@@ -38,8 +38,8 @@ export const resourcesRouter = router({
 
     return items;
   }),
-  create: protectedProcedure.input(resourceSchema).mutation(async ({ ctx, input }) => {
-    const item = await ctx.prisma.resources.create({
+  create: protectedProcedure.input(articleSchema).mutation(async ({ ctx, input }) => {
+    const item = await ctx.prisma.articles.create({
       data: {
         ...input,
       },
@@ -47,8 +47,8 @@ export const resourcesRouter = router({
 
     return item;
   }),
-  update: protectedProcedure.input(resourceSchema).mutation(async ({ ctx, input }) => {
-    const item = await ctx.prisma.resources.update({
+  update: protectedProcedure.input(articleSchema).mutation(async ({ ctx, input }) => {
+    const item = await ctx.prisma.articles.update({
       where: {
         id: input.id,
       },
@@ -60,7 +60,7 @@ export const resourcesRouter = router({
     return item;
   }),
   destroy: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-    const item = await ctx.prisma.resources.update({
+    const item = await ctx.prisma.articles.update({
       where: {
         id: input,
       },

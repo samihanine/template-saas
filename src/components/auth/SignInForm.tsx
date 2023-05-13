@@ -6,6 +6,9 @@ import { deleteCookie } from 'cookies-next';
 import Link from 'next/link';
 import { LoadingSpinner } from '@/components/icons/LoadingSpinner';
 import { LANG_COOKIE_KEY } from '@/constants';
+import { Input } from '../ui/Input';
+import { Label } from '../ui/Label';
+import { Button } from '../ui/Button';
 
 export const SignInForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -53,11 +56,9 @@ export const SignInForm: React.FC = () => {
       className="space-y-6"
     >
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          {t('email')}
-        </label>
+        <Label htmlFor="email">{t('email')}</Label>
         <div className="mt-1">
-          <input
+          <Input
             id="email"
             name="email"
             type="email"
@@ -65,22 +66,19 @@ export const SignInForm: React.FC = () => {
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>
 
       <div className="space-y-1">
         <div className="flex justify-between">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            {t('password')}
-          </label>
+          <Label htmlFor="password">{t('password')}</Label>
           <div className="text-sm">
             <Link href="/auth/forgot">{t('forgot')}</Link>
           </div>
         </div>
         <div className="mt-1">
-          <input
+          <Input
             id="password"
             name="password"
             type="password"
@@ -88,7 +86,6 @@ export const SignInForm: React.FC = () => {
             onChange={(event) => setPassword(event.target.value)}
             autoComplete="current-password"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
         </div>
       </div>
@@ -96,13 +93,9 @@ export const SignInForm: React.FC = () => {
       {errorMessage && <p className="text-sm text-red-600 ">{errorMessage}</p>}
 
       <div className="space-y-4">
-        <button
-          type="submit"
-          disabled={loading}
-          className="flex w-full justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        >
+        <Button type="submit" disabled={loading}>
           {loading ? <LoadingSpinner /> : t('signIn')}
-        </button>
+        </Button>
       </div>
     </form>
   );

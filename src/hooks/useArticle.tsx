@@ -1,7 +1,7 @@
 import { trpc } from '@/utils/trpc';
 
-export const useJobs = () => {
-  const res = trpc.jobs.getAll.useQuery(undefined, {
+export const useArticles = () => {
+  const res = trpc.articles.getAll.useQuery(undefined, {
     staleTime: Infinity,
   });
 

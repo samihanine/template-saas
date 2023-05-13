@@ -16,7 +16,7 @@ type LogsnagInsightConfig = {
 };
 
 const API_URL = 'https://api.logsnag.com/v1';
-const PROJECT_NAME = 'railtrack';
+const PROJECT_NAME = 'template-sass';
 
 export const log = async (config: LogsnagConfig) => {
   const env = process.env.NODE_ENV;

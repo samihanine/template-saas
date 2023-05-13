@@ -84,9 +84,6 @@ export const SetPasswordForm: React.FC = () => {
         </div>
       </div>
 
-      {successMessage && <p className="text-sm text-green-600 ">{successMessage}</p>}
-      {errorMessage && <p className="text-sm text-red-600 ">{errorMessage}</p>}
-
       <div>
         <button
           type="submit"

@@ -7,6 +7,8 @@ import { LANG_COOKIE_KEY } from '@/constants';
 import { trpc } from '@/utils/trpc';
 import { Card } from '../layouts/Card';
 import { Button } from '../ui/Button';
+import { Label } from '../ui/Label';
+import { Select } from '../ui/Select';
 
 export const Account: React.FC = () => {
   const t = useTranslations('settings');
@@ -63,20 +65,17 @@ export const Account: React.FC = () => {
 
         <div className="space-y-4">
           <div className="col-span-4 sm:col-span-2">
-            <label htmlFor="locale" className="block text-sm font-medium text-gray-700">
-              {t('language')}
-            </label>
-            <select
+            <Label htmlFor="locale">{t('language')}</Label>
+            <Select
               id="locale"
               name="locale"
               value={selectedLang ?? locale}
               onChange={(e) => setSelectedLang(e.target.value)}
               autoComplete="country-name"
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
             >
               <option value="en">English</option>
               <option value="fr">French</option>
-            </select>
+            </Select>
           </div>
         </div>
 
